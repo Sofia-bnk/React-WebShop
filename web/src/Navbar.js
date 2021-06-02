@@ -9,8 +9,10 @@ function Navbar(props) {
         <li>
           <Link to="/"> Home </Link>
         </li>
-        <li>About</li>
-        <li>login</li>
+
+        <li>
+          <Link to="/login"> Login </Link>
+        </li>
       </ul>
     </nav>
   );

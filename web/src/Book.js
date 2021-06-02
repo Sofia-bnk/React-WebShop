@@ -2,13 +2,11 @@ import axios from "axios";
 import React, { useState, useEffect, useCallback } from "react";
 import Comments from "./Comments";
 import "./book.css";
-import { Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SomeContext from "./SomeContext";
 import ReactStars from "react-rating-stars-component";
 
 function Book({ match }) {
-  const [show, setShow] = useState(false);
   const [book, setBook] = useState({});
   const [reviews, setReviews] = useState([]);
 
@@ -41,16 +39,8 @@ function Book({ match }) {
           <h1>Customers Reviews</h1>
           <hr style={{ width: "50%" }}></hr>
         </div>
-        <Button
-          variant="secondary"
-          size="lg"
-          active
-          className="btn"
-          onClick={() => setShow(true)}
-        >
-          WRITE A REVIEW
-        </Button>
-        {show && <Comments />}
+
+        <Comments />
 
         {reviews.map((review) => (
           <div key={review.comment} className="box">

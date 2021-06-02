@@ -8,52 +8,65 @@ import SomeContext from "./SomeContext";
 function Comments() {
   const [stars, setStars] = useState(0);
   const [comment, setComment] = useState("");
-  const { reviews, setReviews } = useContext(SomeContext);
-  const [value, setvalue] = useState("");
+  const [show, setShow] = useState(false);
+  const { setReviews } = useContext(SomeContext);
+
   function handleSubmit(e) {
     e.preventDefault();
-    setReviews((r) => r.concat({ stars, comment }));
-    setStars(1);
+    setReviews((reviews) => reviews.concat({ stars, comment }));
+    setStars(0);
     console.log(stars);
-    setvalue("");
+    setComment("");
+    setShow(false);
   }
 
   return (
     <>
-      <div className="review">
-        <div className="stars">
-          <ReactStars
-            count={5}
-            onChange={(stars) => {
-              setStars(stars);
-              console.log(stars);
-            }}
-            size={30}
-            activeColor="#ffd700"
-            value={stars}
-          />
+      <Button
+        variant="secondary"
+        size="lg"
+        active
+        className="btn"
+        onClick={() => setShow(true)}
+      >
+        WRITE A REVIEW
+      </Button>
+      {show && (
+        <div className="review">
+          <div className="stars">
+            <ReactStars
+              count={5}
+              onChange={(stars) => {
+                setStars(stars);
+                console.log(stars);
+              }}
+              size={30}
+              activeColor="#ffd700"
+              value={stars}
+            />
+          </div>
+          <h4> Comment :</h4>
+
+          <form onSubmit={handleSubmit} className="form">
+            <textarea
+              id="comment"
+              name="comment"
+              value={comment}
+              onChange={(event) => setComment(event.target.value)}
+            />
+
+            <Button
+              variant="secondary"
+              className="submit"
+              size="m"
+              type="submit"
+              active
+            >
+              Submit
+            </Button>
+          </form>
         </div>
-        <h4> Comment :</h4>
-
-        <form onSubmit={handleSubmit} className="form">
-          <textarea
-            id="comment"
-            name="comment"
-            value={value}
-            onChange={(event) => setComment(event.target.value)}
-          />
-
-          <Button
-            variant="secondary"
-            className="submit"
-            size="m"
-            type="submit"
-            active
-          >
-            Submit
-          </Button>
-        </form>
-      </div>
+      )}
     </>
   );
 }

@@ -17,15 +17,14 @@ function Books(props) {
   return (
     <div className={props.className}>
       {books.map((book) => (
-        <h1 key={book.ISBN13}>
-          <img
-            src={`https://image.bokus.com/images/${book.ISBN13}`}
-            alt="book"
-          />
-          <div>
-            <Link to={`/${book.ISBN13}`}> {book.Title} </Link>
-          </div>
-        </h1>
+        <div key={book.ISBN13}>
+          <Link to={`/book/${book.ISBN13}`}>
+            <img
+              src={`https://image.bokus.com/images/${book.ISBN13}`}
+              alt="book"
+            />
+          </Link>
+        </div>
       ))}
     </div>
   );
