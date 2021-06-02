@@ -9,20 +9,19 @@ function Comments() {
   const [stars, setStars] = useState(0);
   const [comment, setComment] = useState("");
   const { reviews, setReviews } = useContext(SomeContext);
-
+  const [value, setvalue] = useState("");
   function handleSubmit(e) {
     e.preventDefault();
     setReviews((r) => r.concat({ stars, comment }));
     setStars(1);
     console.log(stars);
-    setComment("");
+    setvalue("");
   }
 
   return (
     <>
       <div className="review">
         <div className="stars">
-          <h4>Rating</h4>
           <ReactStars
             count={5}
             onChange={(stars) => {
@@ -34,12 +33,13 @@ function Comments() {
             value={stars}
           />
         </div>
-        <h4> Comment:</h4>
+        <h4> Comment :</h4>
 
         <form onSubmit={handleSubmit} className="form">
           <textarea
             id="comment"
             name="comment"
+            value={value}
             onChange={(event) => setComment(event.target.value)}
           />
 

@@ -9,11 +9,8 @@ import ReactStars from "react-rating-stars-component";
 
 function Book({ match }) {
   const [show, setShow] = useState(false);
-
   const [book, setBook] = useState({});
   const [reviews, setReviews] = useState([]);
-
-  console.log(match);
 
   const fetchBook = useCallback(async () => {
     const response = await axios.get(
@@ -55,7 +52,6 @@ function Book({ match }) {
         </Button>
         {show && <Comments />}
 
-        <hr style={{ width: "50%" }}></hr>
         {reviews.map((review) => (
           <div key={review.comment} className="box">
             <ReactStars

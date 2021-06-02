@@ -1,7 +1,6 @@
 .stars {
-  border-bottom: solid;
   border-top: solid;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 .form {
   display: flex;
