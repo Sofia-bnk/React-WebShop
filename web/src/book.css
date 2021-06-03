@@ -8,3 +8,14 @@
 img {
   padding-bottom: 3rem;
 }
+
+.rating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.average {
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -9,11 +9,11 @@ function Comments() {
   const [stars, setStars] = useState(0);
   const [comment, setComment] = useState("");
   const [show, setShow] = useState(false);
-  const { setReviews } = useContext(SomeContext);
+  const { reviews, setReviews } = useContext(SomeContext);
 
   function handleSubmit(e) {
     e.preventDefault();
-    setReviews((reviews) => reviews.concat({ stars, comment }));
+    setReviews(reviews.concat({ stars, comment }));
     setStars(0);
     console.log(stars);
     setComment("");

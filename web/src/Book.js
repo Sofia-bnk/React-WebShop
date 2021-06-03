@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect, useCallback } from "react";
 import Comments from "./Comments";
+import Review from "./Review";
 import "./book.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SomeContext from "./SomeContext";
@@ -22,6 +23,16 @@ function Book({ match }) {
     fetchBook();
   }, [fetchBook]);
 
+  function calculateAverage(reviews) {
+    if (reviews.length === 0) {
+      return 0;
+    }
+    const stars = reviews.map((r) => r.stars);
+    const totalSum = stars.reduce((partialSum, b) => partialSum + b, 0);
+
+    return totalSum / reviews.length;
+  }
+
   return (
     <SomeContext.Provider value={{ reviews, setReviews }}>
       <div className={"book"}>
@@ -31,7 +42,22 @@ function Book({ match }) {
             alt="book"
           />
           <h1>{book.Title}</h1>
-
+          <div className="rating">
+            <ReactStars
+              classNames="average"
+              count={5}
+              size={20}
+              activeColor="#ffd700"
+              edit={false}
+              value={calculateAverage(reviews)}
+              key={reviews.length}
+            />
+            {reviews.length === 0 ? (
+              <span>(No Reviews)</span>
+            ) : (
+              <span>({reviews.length})</span>
+            )}
+          </div>
           <p> Author : {book.Author}</p>
           <p> Price : {book.Price_kr} kr</p>
         </div>
@@ -42,17 +68,8 @@ function Book({ match }) {
 
         <Comments />
 
-        {reviews.map((review) => (
-          <div key={review.comment} className="box">
-            <ReactStars
-              count={5}
-              size={15}
-              activeColor="#ffd700"
-              edit={false}
-              value={review.stars}
-            />
-            {review.comment}
-          </div>
+        {reviews.map((review, index) => (
+          <Review key={index} review={review} />
         ))}
       </div>
     </SomeContext.Provider>
