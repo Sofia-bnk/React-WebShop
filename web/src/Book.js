@@ -28,7 +28,10 @@ function Book({ match }) {
       return 0;
     }
     const stars = reviews.map((r) => r.stars);
-    const totalSum = stars.reduce((partialSum, b) => partialSum + b, 0);
+    const totalSum = stars.reduce(
+      (partialSum, starValue) => partialSum + starValue,
+      0
+    );
 
     return totalSum / reviews.length;
   }
